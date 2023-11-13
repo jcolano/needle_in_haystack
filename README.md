@@ -1,8 +1,4 @@
-# needle_in_haystack
-Experiment to find a sentence in large context GPT-4 at varying context sizes and document depths.
-
-# 'Search needle in the haystack' tests...
-## ...and proving that the middle of context may be perfectly fine
+# Evaluating Contextual Retrieval in Large Language Models
 
 Some empirical studies and experiments about language models' use of long input contexts have found that language models often struggle to use information in the middle of long input contexts, and that performance decreases as the input context grows longer. 
 
@@ -55,6 +51,8 @@ After setting up the script to inject just one needle and leaving the rest uncha
 The result with 1 needle injection: **100% retrieval**  
 
 Both experiments executed find the needle 100% of the times in the ranges of context and depth tested.
+
+![image](https://github.com/jcolano/needle_in_haystack/assets/1131538/8092e063-8fc0-4895-a52d-80cabe15a7da)
 
 
 ## Conclusion
