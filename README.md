@@ -1,6 +1,7 @@
 # Evaluating Contextual Retrieval in Large Language Models
 
 **Authors** [Juan Olano](https://www.linkedin.com/in/juan-olano-b9a330112/), [Chris Alexiuk](https://www.linkedin.com/in/csalexiuk/), [James Tolton](james@tolton.technology)
+**Date** Nov.12/2023
 
 Some empirical studies and experiments about language models' use of long input contexts have found that language models often struggle to use information in the middle of long input contexts, and that performance decreases as the input context grows longer. 
 
