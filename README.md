@@ -1,5 +1,10 @@
 # Evaluating Contextual Retrieval in Large Language Models
 
+**Authors**
+Juan Olano (https://www.linkedin.com/in/juan-olano-b9a330112/)
+Chris Alexiuk (https://www.linkedin.com/in/csalexiuk/)
+JAmes Tolton (james@tolton.technology)
+
 Some empirical studies and experiments about language models' use of long input contexts have found that language models often struggle to use information in the middle of long input contexts, and that performance decreases as the input context grows longer. 
 
 The paper "Lost in the Middle: How Language Models Use Long Contexts" (https://arxiv.org/abs/2307.03172) argues that in LLMs with large contexts, the "... performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts." By the end of the paper, they "conclude with a practical case study of open-domain question answering, finding that the performance of language model readers saturates far before retriever recall. Our results and analysis provide a better understanding of how language models use their input context and provides new evaluation protocols for future long-context models."
