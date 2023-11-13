@@ -58,6 +58,8 @@ Both experiments executed find the needle 100% of the times in the ranges of con
 
 
 ## Conclusion
+*This conclusion was written with the assistance of ChatGPT*
+
 The hypothesis and experiments aim to test the ability of large language models (LLMs) like GPT-4 to retrieve specific information embedded within a large context. The experiments are designed to challenge the assertion that LLMs struggle to access relevant information located in the middle of long contexts, as suggested by the paper "Lost in the Middle: How Language Models Use Long Contexts."
 
 This approach involves embedding a specific statement ("The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day.") at various depths within a large text body composed of Paul Graham essays. We then ask GPT-4 to locate this statement, or "needle," within the "haystack" of background text, testing contexts ranging from 60K to 120K tokens and depths from 20% to 80%.
