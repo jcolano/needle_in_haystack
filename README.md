@@ -16,12 +16,12 @@ My initial issue with this test is that it is a known fact that the Attention me
 
 We decided to execute this experiment ourselves. For that, we started with a hypothesis.
 
-### HYPOTHESIS:
+### HYPOTHESIS
 If we hide two needles instead of 1, may be we get pinched. In other words: If we make this signal stronger, the model will be able to retrieve it.
 
 With this hypothesis we created the required code to perform the experiments.
 
-### EXPERIMENT 1:
+### EXPERIMENT 1
 
 ##### Process
 
