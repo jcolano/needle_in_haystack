@@ -6,55 +6,55 @@ Experiment to find a sentence in large context GPT-4 at varying context sizes an
 
 Some empirical studies and experiments about language models' use of long input contexts have found that language models often struggle to use information in the middle of long input contexts, and that performance decreases as the input context grows longer. 
 
-The paper Lost in the Middle: How Language Models Use Long Contexts (https://arxiv.org/abs/2307.03172) argues that in LLMs with large contexts, the "... performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts." Intheir conclusion they state that "we conclude with a practical case study of open-domain question answering, finding that the performance of language model readers saturates far before retriever recall. Our results and analysis provide a better understanding of how language models use their input context and provides new evaluation protocols for future long-context models."
+The paper Lost in the Middle: How Language Models Use Long Contexts (https://arxiv.org/abs/2307.03172) argues that in LLMs with large contexts, the "... performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts." By the end of the paper, they "conclude with a practical case study of open-domain question answering, finding that the performance of language model readers saturates far before retriever recall. Our results and analysis provide a better understanding of how language models use their input context and provides new evaluation protocols for future long-context models."
 
-I have also been seeing tests of the capacity of GPT-4-Turbo 128K to retrieve a fact hidden in a document at different positions of the document and at different context sizes, an experiment called 'Needle In The Haystack".
+We have also been seeing experiments that test the ability of GPT-4-Turbo 128K to retrieve a fact hidden in a document at different positions of the document and at different context sizes, an experiment called 'Needle In The Haystack", where a piece of information is injected to a document in a random location.
 
-In the experiments I have seen,which can be found in X posts, the 'Middle of Context' problem seems to be ratified. In these experiments, the model could not retrieve information in large context when the context was over 60K tokens, and when the depth of the needle in the document was between 50% and 70%
+In the experiments I have seen, which can be found in X posts, the 'Middle of Context' problem seems to be ratified. In these experiments, the model could not retrieve information in large context when the context was over 60K tokens, and when the depth of the needle in the document was between 50% and 70%.
 
-My initial issue with this test is that it is a known fact that the Attention mechanism blurs (averages) a little bit the context, and even with this blurring the results are impressive. But, when you hide one small sentence in the middle of a context of 70K to 120K tokens, and this fact is located at a depth between 30% and 70%, it is very possible that a retrieval can happen accurately. 
+My initial issue with this test is that it is a known fact that the Attention mechanism blurs (averages) a little bit the context. But, when you hide one small sentence in the middle of a context of 70K to 120K tokens, and this fact is located at a depth between 30% and 70%, it is very possible that a retrieval can happen accurately. 
 
-I needed to execute this experiment myself. For that, I start with a hypothesis.
+We decided to execute this experiment ourselves. For that, we started with a hypothesis.
 
 ### HYPOTHESIS:
-If I hide two needles, may be I get pinched. In other words: If I make this signal stronger, the model will be able to retrieve it.
+If we hide two needles instead of 1, may be we get pinched. In other words: If we make this signal stronger, the model will be able to retrieve it.
 
-With this hypothesis I created the required code to perform the experiments.
+With this hypothesis we created the required code to perform the experiments.
 
-#### EXPERIMENT 1:
+### EXPERIMENT 1:
 
 ##### Process
 
 One simple way to increase the strength of the signal of this needle in the middle of the haystack is by putting it twice. Other ways would be to insert a supporting fact around the first fact. Another would be to insert the needle or supporting facts at several depths.
 
-Note: My code and experiments are heavely based on the code by Greg Kamrdt found here: https://github.com/gkamradt/LLMTest_NeedleInAHaystack
+Note: Our code and experiments are heavely based on the code found here: https://github.com/gkamradt/LLMTest_NeedleInAHaystack
 
 - Step 1: Use of Paul Graham essays as ‘background’ tokens, similar to one of the experiments I mentioned above. These documents can generate over 120K tokens when concatenated.
 - Step 2: Place the following statement at various depths: “The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day.”.
-- Step 3: Ask GPT-4 to answer this question only using the context provided using the OpenAI API.
-- Step 4: Evaluate GPT-4s answer with another model (gpt-4 again) using again the OpenAI API.
+- Step 3: Ask GPT-4 to answer this question only using the context provided using the OpenAI API: ""What is the most fun thing to do in San Francisco?"
+- Step 4: Evaluate GPT-4-Turbo-128K answer with another model (also gpt-4) using the OpenAI API.
 
-The above process was repeated for all combinations context size from 60K to 120K in increments of 10K, and for different depths of needle location, from 20% up to 80% in increments of 10%.
+The above process was repeated for all combination context sizes, from 60K to 120K in increments of 10K, and for different depths of needle location, from 20% up to 80% in increments of 10%.
 This resulted in a total of 49 experiments.
 
 Main differences with the code I used as base code:
 1. The original code uses Langchain to run the prompts of the retrieval and the evaluation, while I use directly the GPT-4 API.
-2. My notebook focuses in the area the proved to be weaker in the results in GPT-4. I am excluding the 'good' areas as per the above experiments.
+2. My notebook focuses in the area the proved to be weaker in the results in GPT-4. I am excluding the 'good' areas as per the above experiments, namely: context from 60K to 120K and depth from 20% to 80%.
 
 ##### RESULTS EXPERIMENT 1
-To my surprise, with a simple duplication of the needle, I was able to get 100% accuracy in the retrieval.
+In this experiment we injected the needle twice.  With a simple duplication of the needle, we were able to get **100% accuracy** in the retrieval.
 
-Having achieved a perfect score with the '2 needles' strategy, I went back to the differences between other experiments and my experiments. Besides the 2 needles I injected instead of 1, the other difference was: both previous experiments were done using LangChain.
+Having achieved a perfect score with the '2 needles' strategy, we went back to the differences between other experiments and our experiments. Besides the 2 needles injected instead of 1, the other difference was: both previous experiments were done using a library, and not the OpenAI GPT-4 API directly.
 
 #### EXPERIMENT 2 
-I decided to run the experiment with a single needle, using the GPT-4 API directly, as with the first experiment. 
+We decided to run the experiment with a single needle, using the GPT-4 API directly, as with the first experiment. 
 
-After setting up the script to inject just one needle and leaving the rest unchanged, I executed this second experiment.
+After setting up the script to inject just one needle and leaving the rest unchanged, we executed this second experiment.
 
 ##### RESULTS EXPERIMENT 2
-The result with 1 needle injection: 100% retrieval.  
+The result with 1 needle injection: **100% retrieval**  
 
-Both experiments I executed find the needle 100% of the times in the ranges of context and depth tested. Could it be an issue with LlamaIndex?
+Both experiments executed find the needle 100% of the times in the ranges of context and depth tested.
 
 
 ## Conclusion
